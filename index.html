@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gen App - Download Center</title>
+  <meta name="description" content="Pusat unduhan aplikasi Android untuk Nihonggo App dan FutureWealth.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f8f4ea;
+      --ink: #1f2937;
+      --teal: #0f766e;
+      --teal-soft: #14b8a6;
+      --amber: #b45309;
+      --amber-soft: #f59e0b;
+      --card: rgba(255, 255, 255, 0.88);
+      --line: rgba(15, 118, 110, 0.16);
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Space Grotesk", sans-serif;
+      background:
+        radial-gradient(circle at 8% 12%, rgba(252, 211, 77, 0.32), transparent 40%),
+        radial-gradient(circle at 88% 20%, rgba(20, 184, 166, 0.24), transparent 44%),
+        linear-gradient(135deg, #fffaf2, var(--bg));
+      overflow-x: hidden;
+    }
+
+    .bg-grid::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: linear-gradient(to right, rgba(31, 41, 55, 0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(31, 41, 55, 0.035) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero {
+      padding-top: 5rem;
+      padding-bottom: 2.2rem;
+      position: relative;
+      text-align: center;
+    }
+
+    .hero-title {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(2.1rem, 4vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: 0.2px;
+    }
+
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal);
+      padding: 0.45rem 0.85rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(20, 184, 166, 0.06);
+      margin-bottom: 1.2rem;
+    }
+
+    .btn-pill {
+      border-radius: 999px;
+    }
+
+    .app-card {
+      position: relative;
+      border: 1px solid var(--line);
+      background: var(--card);
+      backdrop-filter: blur(6px);
+      border-radius: 1.2rem;
+      box-shadow: 0 18px 40px rgba(15, 118, 110, 0.12);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .app-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 54px rgba(15, 118, 110, 0.18);
+    }
+
+    .app-card::after {
+      content: "";
+      position: absolute;
+      left: -20%;
+      right: -20%;
+      top: -78px;
+      height: 140px;
+      background: linear-gradient(95deg, rgba(20, 184, 166, 0.12), rgba(245, 158, 11, 0.26));
+      transform: rotate(-2deg);
+      z-index: 0;
+    }
+
+    .app-card .card-body {
+      position: relative;
+      z-index: 1;
+      padding: 1.35rem;
+    }
+
+    .app-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.35rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .icon-nihongo {
+      background: linear-gradient(145deg, #0f766e, #14b8a6);
+    }
+
+    .icon-wealth {
+      background: linear-gradient(145deg, #b45309, #f59e0b);
+    }
+
+    .app-title {
+      font-size: 1.28rem;
+      font-weight: 700;
+      margin-bottom: 0.55rem;
+      line-height: 1.2;
+    }
+
+    .app-sub {
+      color: #4b5563;
+      margin-bottom: 1rem;
+      font-size: 0.96rem;
+    }
+
+    .meta {
+      display: grid;
+      gap: 0.56rem;
+      margin-bottom: 1.05rem;
+    }
+
+    .meta-item {
+      font-size: 0.9rem;
+      padding: 0.56rem 0.7rem;
+      border-radius: 0.7rem;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px dashed rgba(15, 118, 110, 0.18);
+    }
+
+    .btn-download {
+      border: none;
+      background: linear-gradient(92deg, var(--teal), var(--teal-soft));
+      color: #fff;
+      font-weight: 700;
+      border-radius: 0.8rem;
+      padding: 0.66rem 1rem;
+      box-shadow: 0 10px 24px rgba(15, 118, 110, 0.26);
+    }
+
+    .btn-download:hover {
+      color: #fff;
+      filter: brightness(1.03);
+    }
+
+    .btn-outline-custom {
+      border: 1px solid rgba(31, 41, 55, 0.2);
+      color: #1f2937;
+      font-weight: 600;
+      border-radius: 0.8rem;
+      padding: 0.66rem 1rem;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .btn-outline-custom:hover {
+      background: #fff;
+      color: #111827;
+    }
+
+    .qr-wrap {
+      margin-top: 1.15rem;
+      border: 1px solid rgba(31, 41, 55, 0.09);
+      border-radius: 0.9rem;
+      padding: 0.8rem;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .qr-title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #374151;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+
+    .qr-box {
+      width: 132px;
+      height: 132px;
+      border-radius: 0.8rem;
+      background: #ffffff;
+      border: 1px solid rgba(31, 41, 55, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.4rem;
+      overflow: hidden;
+    }
+
+    .qr-box img,
+    .qr-box canvas {
+      max-width: 118px;
+      max-height: 118px;
+    }
+
+    .qr-hint {
+      margin: 0;
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+
+    .help-section {
+      border: 1px solid rgba(180, 83, 9, 0.2);
+      border-radius: 1.2rem;
+      background: linear-gradient(130deg, rgba(255, 255, 255, 0.92), rgba(254, 243, 199, 0.64));
+      padding: 1.2rem;
+    }
+
+    .step-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 118, 110, 0.14);
+      color: var(--teal);
+      font-weight: 700;
+      margin-right: 0.45rem;
+      flex: 0 0 34px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      animation: rise 0.8s ease forwards;
+    }
+
+    .delay-1 { animation-delay: 0.08s; }
+    .delay-2 { animation-delay: 0.18s; }
+    .delay-3 { animation-delay: 0.28s; }
+
+    @keyframes rise {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      color: #374151;
+      font-size: 0.9rem;
+      padding-bottom: 2.2rem;
+    }
+
+    @media (max-width: 576px) {
+      .hero {
+        padding-top: 3.3rem;
+      }
+
+      .app-title {
+        font-size: 1.15rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-grid">
+  <main class="container pb-5">
+    <section class="hero">
+      <span class="hero-chip reveal"><i class="bi bi-stars"></i> Gen App Download Hub</span>
+      <h1 class="hero-title reveal delay-1">Unduh Aplikasi Kamu Dalam Satu Tempat</h1>
+      <p class="lead mt-3 mb-3 reveal delay-2">
+        Pilih aplikasi yang ingin diinstal, tekan tombol unduh APK, atau scan QR langsung dari HP.
+      </p>
+      <div class="d-flex justify-content-center gap-2 flex-wrap reveal delay-2">
+        <a class="btn btn-outline-custom btn-pill" href="./releases.html"><i class="bi bi-clock-history me-1"></i> Riwayat Versi</a>
+        <a class="btn btn-outline-custom btn-pill" href="#cara-instal"><i class="bi bi-phone me-1"></i> Cara Instal</a>
+      </div>
+    </section>
+
+    <section class="row g-4 mt-1">
+      <div class="col-12 col-lg-6 reveal delay-2">
+        <article class="app-card">
+          <div class="card-body">
+            <span class="app-icon icon-nihongo"><i class="bi bi-translate"></i></span>
+            <h2 class="app-title">nihonggo.app</h2>
+            <p class="app-sub">Belajar huruf Jepang dengan kuis interaktif, ringan, dan cocok untuk latihan harian.</p>
+
+            <div class="meta">
+              <div class="meta-item"><strong>File:</strong> nihonggo.app.apk</div>
+              <div class="meta-item"><strong>Platform:</strong> Android (APK)</div>
+              <div class="meta-item"><strong>Lokasi Unduhan:</strong> /downloads/nihonggo.app.apk</div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-download" href="./downloads/nihonggo.app.apk" download="nihonggo.app.apk">
+                <i class="bi bi-download me-1"></i> Unduh APK
+              </a>
+              <a class="btn btn-outline-custom" href="./releases.html#nihonggo-app" rel="noopener noreferrer">
+                <i class="bi bi-journal-text me-1"></i> Lihat Versi
+              </a>
+            </div>
+
+            <div class="qr-wrap">
+              <p class="qr-title mb-2"><i class="bi bi-qr-code-scan me-1"></i> Scan QR</p>
+              <div id="qr-nihongo" class="qr-box"></div>
+              <p class="qr-hint">Scan untuk membuka link download APK secara langsung.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-12 col-lg-6 reveal delay-3">
+        <article class="app-card">
+          <div class="card-body">
+            <span class="app-icon icon-wealth"><i class="bi bi-piggy-bank"></i></span>
+            <h2 class="app-title">FutureWealth</h2>
+            <p class="app-sub">Aplikasi perencanaan tabungan dan financial freedom untuk target keuangan yang lebih jelas.</p>
+
+            <div class="meta">
+              <div class="meta-item"><strong>File:</strong> FutureWealth.apk</div>
+              <div class="meta-item"><strong>Platform:</strong> Android (APK)</div>
+              <div class="meta-item"><strong>Lokasi Unduhan:</strong> /downloads/FutureWealth.apk</div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-download" href="./downloads/FutureWealth.apk" download="FutureWealth.apk">
+                <i class="bi bi-download me-1"></i> Unduh APK
+              </a>
+              <a class="btn btn-outline-custom" href="./releases.html#futurewealth" rel="noopener noreferrer">
+                <i class="bi bi-journal-text me-1"></i> Lihat Versi
+              </a>
+            </div>
+
+            <div class="qr-wrap">
+              <p class="qr-title mb-2"><i class="bi bi-qr-code-scan me-1"></i> Scan QR</p>
+              <div id="qr-futurewealth" class="qr-box"></div>
+              <p class="qr-hint">Scan untuk membuka link download APK secara langsung.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="help-section mt-4 reveal delay-3" id="cara-instal">
+      <h3 class="h5 fw-bold mb-3"><i class="bi bi-phone me-2"></i>Cara Instal di Android</h3>
+      <div class="d-flex align-items-start mb-2">
+        <span class="step-badge">1</span>
+        <p class="mb-0">Unduh file APK dari tombol yang tersedia atau gunakan QR code.</p>
+      </div>
+      <div class="d-flex align-items-start mb-2">
+        <span class="step-badge">2</span>
+        <p class="mb-0">Jika diminta, aktifkan izin Install unknown apps di pengaturan perangkat.</p>
+      </div>
+      <div class="d-flex align-items-start">
+        <span class="step-badge">3</span>
+        <p class="mb-0">Buka file APK hasil unduhan dan lanjutkan proses instalasi sampai selesai.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container text-center reveal delay-3">
+    <div class="pt-3 border-top border-secondary-subtle">
+      <span id="year"></span> Gen App. Halaman unduh aplikasi Android.
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function buildQrCode(targetId, apkPath, colorDark) {
+      var hostUrl = new URL(apkPath, window.location.href).toString();
+      var target = document.getElementById(targetId);
+      if (!target || typeof QRCode === "undefined") {
+        return;
+      }
+
+      new QRCode(target, {
+        text: hostUrl,
+        width: 118,
+        height: 118,
+        colorDark: colorDark,
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+
+    buildQrCode("qr-nihongo", "./downloads/nihonggo.app.apk", "#0f766e");
+    buildQrCode("qr-futurewealth", "./downloads/FutureWealth.apk", "#b45309");
+  </script>
+</body>
+</html>
