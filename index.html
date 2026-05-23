@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gen App - Download Center</title>
-  <meta name="description" content="Pusat unduhan aplikasi Android untuk Nihonggo App dan FutureWealth.">
+  <meta name="description" content="Pusat unduhan aplikasi Android untuk Nihonggo App, FutureWealth, dan Kopi Makassar.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -133,6 +133,10 @@
 
     .icon-wealth {
       background: linear-gradient(145deg, #b45309, #f59e0b);
+    }
+
+    .icon-kopi {
+      background: linear-gradient(145deg, #5D4037, #A1887F);
     }
 
     .app-title {
@@ -303,7 +307,7 @@
     </section>
 
     <section class="row g-4 mt-1">
-      <div class="col-12 col-lg-6 reveal delay-2">
+      <div class="col-12 col-md-6 col-lg-4 reveal delay-2">
         <article class="app-card">
           <div class="card-body">
             <span class="app-icon icon-nihongo"><i class="bi bi-translate"></i></span>
@@ -334,7 +338,7 @@
         </article>
       </div>
 
-      <div class="col-12 col-lg-6 reveal delay-3">
+      <div class="col-12 col-md-6 col-lg-4 reveal delay-3">
         <article class="app-card">
           <div class="card-body">
             <span class="app-icon icon-wealth"><i class="bi bi-piggy-bank"></i></span>
@@ -359,6 +363,37 @@
             <div class="qr-wrap">
               <p class="qr-title mb-2"><i class="bi bi-qr-code-scan me-1"></i> Scan QR</p>
               <div id="qr-futurewealth" class="qr-box"></div>
+              <p class="qr-hint">Scan untuk membuka link download APK secara langsung.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-12 col-md-6 col-lg-4 reveal delay-3">
+        <article class="app-card">
+          <div class="card-body">
+            <span class="app-icon icon-kopi"><i class="bi bi-cup-hot-fill"></i></span>
+            <h2 class="app-title">Kopi Makassar</h2>
+            <p class="app-sub">Aplikasi panduan kopi khas Makassar — resep, sejarah, dan cara penyajian autentik.</p>
+
+            <div class="meta">
+              <div class="meta-item"><strong>File:</strong> KopiMakassar.apk</div>
+              <div class="meta-item"><strong>Platform:</strong> Android (APK)</div>
+              <div class="meta-item"><strong>Lokasi Unduhan:</strong> /downloads/KopiMakassar.apk</div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2">
+              <a class="btn btn-download" href="./downloads/KopiMakassar.apk" download="KopiMakassar.apk">
+                <i class="bi bi-download me-1"></i> Unduh APK
+              </a>
+              <a class="btn btn-outline-custom" href="./releases.html#kopi-makassar" rel="noopener noreferrer">
+                <i class="bi bi-journal-text me-1"></i> Lihat Versi
+              </a>
+            </div>
+
+            <div class="qr-wrap">
+              <p class="qr-title mb-2"><i class="bi bi-qr-code-scan me-1"></i> Scan QR</p>
+              <div id="qr-kopi" class="qr-box"></div>
               <p class="qr-hint">Scan untuk membuka link download APK secara langsung.</p>
             </div>
           </div>
@@ -413,6 +448,7 @@
 
     buildQrCode("qr-nihongo", "./downloads/nihonggo.app.apk", "#0f766e");
     buildQrCode("qr-futurewealth", "./downloads/FutureWealth.apk", "#b45309");
+    buildQrCode("qr-kopi", "./downloads/KopiMakassar.apk", "#5D4037");
   </script>
 </body>
 </html>
